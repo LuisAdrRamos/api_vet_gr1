@@ -9,8 +9,8 @@ const registro = async (req, res) => {
     if (verificarEmail) return res.status(400).json({msg:"lo sentimos este email ya esta registrado"})
 
     const nuevoVeterinario = new veterinario(req.body)
-    nuevoVeterinario.password = nuevoVeterinario.encrypPassword(password)
-    nuevoVeterinario.password.crearToken()
+    nuevoVeterinario.password = await nuevoVeterinario.encrypPassword(password)
+    nuevoVeterinario.crearToken()
     await nuevoVeterinario.save()
     res.status(200).json(nuevoVeterinario)
     
