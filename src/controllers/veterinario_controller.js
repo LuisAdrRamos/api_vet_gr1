@@ -97,6 +97,24 @@ const perfilUser = (req, res) => {
   res.send("Perfil del usuario")
 }
 
+const actualizarPerfil = (req,res) => {
+  
+}
+
+const actualizarPassword = async (req, res) => {
+    const {password, confirmPassword} = req.body
+    if (Object.values(req.body).includes("")) return res.status(404).json({msg:"Lo sentimos, debes llenar todos los campos"})
+    
+    if (password != confirmPassword) return res.status(404).json({msg:"Las contraseñas no coinciden"})
+    const veterinarioBDD = await Veterinario.findOne({token:req.params.token})
+  
+    veterinarioBDD.password = await veterinarioBDD.encrypPassword(password)
+    await veterinarioBDD.save()
+    res.status(200).json({msg:"Contraseña cambiada exitosamente"})
+}
+
+
+
 
 export {
     registro,
@@ -105,5 +123,7 @@ export {
     recuperarPassword,
     tokenPassRecover,
     newPassword,
-    perfilUser
+    perfilUser,
+    actualizarPerfil,
+    actualizarPassword
 }
