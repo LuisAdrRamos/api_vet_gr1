@@ -3,15 +3,15 @@ import { actualizarPassword, actualizarPerfil, confirmEmail, login, newPassword,
 import { verificarAutentificacion } from "../helpers/crearJWT.js";
 const router = Router()
 
-router.post('/registro', registro)
+router.post('/registro/veterinario', registro)
 router.get('/confirmar/:token', confirmEmail)
-router.post('/login', login)
+router.post('/login/veterinario', login)
 router.post('/recuperar-password', recuperarPassword)
 router.post('/recuperar-password/:token', tokenPassRecover)
 router.post('/nueva-password/:token', newPassword)
 
-router.get('/perfil', verificarAutentificacion, perfilUser)
-router.patch('/actualizar-perfil', verificarAutentificacion, actualizarPerfil)
-router.patch('/actualizar-password', verificarAutentificacion, actualizarPassword)
+router.get('/perfil/veterinario', verificarAutentificacion, perfilUser)
+router.put('/actualizar-perfil/veterinario', verificarAutentificacion, actualizarPerfil)
+router.put('/actualizar-password/veteriario', verificarAutentificacion, actualizarPassword)
 
 export default router
